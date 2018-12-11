@@ -7,6 +7,8 @@ package agenda;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,6 +16,52 @@ import java.sql.*;
  * @author carlos
  */
 public class Contacto {
+    
+ private String nombre;
+ private String email; 
+ private String telCasa;
+ private String telCel;
+ private String nota;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelCasa() {
+        return telCasa;
+    }
+
+    public void setTelCasa(String telCasa) {
+        this.telCasa = telCasa;
+    }
+
+    public String getTelCel() {
+        return telCel;
+    }
+
+    public void setTelCel(String telCel) {
+        this.telCel = telCel;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
     
  private static String cadenaConexion; 
  private  Connection con;
@@ -23,7 +71,7 @@ public class Contacto {
      try {
            
             Class.forName("com.mysql.jdbc.Driver").newInstance();             
-            con = DriverManager.getConnection(Contacto.cadenaConexion, "root", "pass1234");
+            con = DriverManager.getConnection(Contacto.cadenaConexion, "root", "binario");
                         
             if(con==null){
                 System.err.println("Conexion " + Contacto.cadenaConexion);
@@ -36,6 +84,64 @@ public class Contacto {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             System.err.println("Error en el motor " + ex.getMessage());
         }
+ }
+ 
+ public void guardar() throws SQLException{
+     if(con.isClosed())
+         conectar();
+     String SQL = "insert into Contactos values(?,?,?,?)";
+     PreparedStatement comando = con.prepareStatement(SQL);
+     comando.setString(0, nombre);
+     comando.setString(1, email);
+     comando.setString(2, telCasa);
+     comando.setString(3, telCel);
+     comando.setString(4, nota);
+     comando.execute();
+     con.close();     
+ }
+ 
+ public void eliminar() throws SQLException{
+ if(con.isClosed())
+         conectar();
+     String SQL = "delete from Contactos where email = ?";
+     PreparedStatement comando = con.prepareStatement(SQL);     
+     comando.setString(0, email);     
+     con.close();   
+ }
+ 
+ public void update() throws SQLException{
+     if(con.isClosed())
+         conectar();
+     String SQL = "update Contactos set nombre=?,email=?,telCasa=?,telCel=?,nota=? where email=?";
+     PreparedStatement comando = con.prepareStatement(SQL);
+     comando.setString(0, nombre);
+     comando.setString(1, email);
+     comando.setString(2, telCasa);
+     comando.setString(3, telCel);
+     comando.setString(4, nota);
+     comando.setString(5, email);
+     comando.execute();
+     con.close();   
+ }
+ 
+ public  List<Contacto> consultar() throws SQLException{
+        List<Contacto> contactos = new ArrayList<>();
+        String SQL = "select * from Contactos";
+        PreparedStatement comando = con.prepareStatement(SQL);        
+        ResultSet res = comando.executeQuery();
+            while(res.next()){
+               Contacto x = new Contacto();
+               x.setNombre(res.getString("nombre"));
+               x.setEmail(res.getString("email"));
+               x.setTelCasa(res.getString("telCasa"));
+               x.setTelCel(res.getString("telCel"));
+               x.setNota(res.getString("nota"));
+               contactos.add(x);
+               } 
+        res.close();
+        con.close();
+     
+     return contactos;
  }
  
  //Ejecucion de  SQL:
@@ -57,7 +163,7 @@ public class Contacto {
  
  
  public Contacto(){
-     Contacto.cadenaConexion = "jdbc:mysql://servidor:3306/agenda?useOldAliasMetadataBehavior=true";
+     Contacto.cadenaConexion = "jdbc:mysql://127.0.0.1:3306/agenda?useOldAliasMetadataBehavior=true";
  }
  
         

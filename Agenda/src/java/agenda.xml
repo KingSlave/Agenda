@@ -9,6 +9,9 @@
         <action name="Menu" class="agenda.Menu">
             <result>/Agenda/Menu.jsp</result>
         </action>
+        <action name="nuevoContacto" class="agenda.Menu">
+            <result>/Agenda/nuevoContacto.jsp</result>
+        </action>
     </package>
 </struts>
 
