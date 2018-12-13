@@ -87,44 +87,46 @@ public class Contacto {
  }
  
  public void guardar() throws SQLException{
-     if(con.isClosed())
+     if(con==null || con.isClosed())
          conectar();
-     String SQL = "insert into Contactos values(?,?,?,?)";
+     String SQL = "insert into Contactos values(?,?,?,?,?)";
      PreparedStatement comando = con.prepareStatement(SQL);
-     comando.setString(0, nombre);
-     comando.setString(1, email);
-     comando.setString(2, telCasa);
-     comando.setString(3, telCel);
-     comando.setString(4, nota);
+     comando.setString(1, nombre);
+     comando.setString(2, email);
+     comando.setString(3, telCasa);
+     comando.setString(4, telCel);
+     comando.setString(5, nota);
      comando.execute();
      con.close();     
  }
  
  public void eliminar() throws SQLException{
- if(con.isClosed())
+ if(con==null || con.isClosed())
          conectar();
      String SQL = "delete from Contactos where email = ?";
      PreparedStatement comando = con.prepareStatement(SQL);     
-     comando.setString(0, email);     
+     comando.setString(1, email);     
      con.close();   
  }
  
  public void update() throws SQLException{
-     if(con.isClosed())
+     if(con==null || con.isClosed())
          conectar();
      String SQL = "update Contactos set nombre=?,email=?,telCasa=?,telCel=?,nota=? where email=?";
      PreparedStatement comando = con.prepareStatement(SQL);
-     comando.setString(0, nombre);
-     comando.setString(1, email);
-     comando.setString(2, telCasa);
-     comando.setString(3, telCel);
-     comando.setString(4, nota);
-     comando.setString(5, email);
+     comando.setString(1, nombre);
+     comando.setString(2, email);
+     comando.setString(3, telCasa);
+     comando.setString(4, telCel);
+     comando.setString(5, nota);
+     comando.setString(6, email);
      comando.execute();
      con.close();   
  }
  
  public  List<Contacto> consultar() throws SQLException{
+     if(con==null || con.isClosed())
+         conectar();
         List<Contacto> contactos = new ArrayList<>();
         String SQL = "select * from Contactos";
         PreparedStatement comando = con.prepareStatement(SQL);        

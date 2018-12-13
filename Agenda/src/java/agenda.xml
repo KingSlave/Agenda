@@ -12,6 +12,13 @@
         <action name="nuevoContacto" class="agenda.Menu">
             <result>/Agenda/nuevoContacto.jsp</result>
         </action>
+        <action name="guardarContacto" class="agenda.Menu" method="guardarContacto">
+            <result>/Agenda/nuevoContacto.jsp</result>
+        </action>
+        <action name="consultar" class="agenda.Menu" method="consultarContactos">
+            <result>/Agenda/consultarContactos.jsp</result>
+        </action>
+ 
     </package>
 </struts>
 

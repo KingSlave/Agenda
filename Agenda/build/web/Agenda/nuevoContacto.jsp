@@ -10,7 +10,7 @@
     <body>
         
         <hr style="margin-top: 2%">
-        
+        <div class="container">
         <form action="guardarContacto">
             <div class="form-group">
                 <label>Nombre: </label>
@@ -34,7 +34,7 @@
             </div>
             <button class="btn btn-primary" type="submit">Enviar</button>                
         </form>
-        
+        </div>
     </body>
 </html>
 
