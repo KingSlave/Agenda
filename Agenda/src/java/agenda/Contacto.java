@@ -140,6 +140,10 @@ public class Contacto {
                x.setNota(res.getString("nota"));
                contactos.add(x);
                } 
+            if(contactos.size()>0)
+                System.out.println("#Contacto = " + contactos.size());
+            else
+                System.out.println("Lista de contactos VACIA!");
         res.close();
         con.close();
      

@@ -16,7 +16,7 @@
             <result>/Agenda/nuevoContacto.jsp</result>
         </action>
         <action name="consultar" class="agenda.Menu" method="consultarContactos">
-            <result>/Agenda/consultarContactos.jsp</result>
+            <result>/Agenda/consultar.jsp</result>
         </action>
  
     </package>

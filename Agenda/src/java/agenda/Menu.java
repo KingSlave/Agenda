@@ -23,6 +23,7 @@ package agenda;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * <code>Set welcome message.</code>
@@ -91,6 +92,7 @@ public class Menu extends ActionSupport {
     }
     
     
+            
     public String guardarContacto() throws SQLException{
         Contacto c= new Contacto();
              c.setNombre(nombre);
@@ -102,5 +104,16 @@ public class Menu extends ActionSupport {
         return SUCCESS;
     }
     
+    public List<Contacto> getContactos() throws SQLException{ 
+       
+        List<Contacto> contactos = new Contacto().consultar();
+        
+        return contactos;        
+    }
+    
+    public String consultarContactos(){
+    
+        return SUCCESS;
+    }
 }
 

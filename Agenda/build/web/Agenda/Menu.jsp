@@ -12,7 +12,7 @@
         <hr style="margin-top: 2%">
         
         <a class="btn btn-primary" href="/Agenda/agenda/nuevoContacto">Nuevo contacto</a>
-        <a class="btn btn-primary" href="consultar">Consulta</a>
+        <a class="btn btn-primary" href="/Agenda/agenda/consultar">Consulta</a>
         
     </body>
 </html>
